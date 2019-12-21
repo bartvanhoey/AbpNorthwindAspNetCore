@@ -11,7 +11,7 @@ namespace Abp.Northwind.Migrations
                 name: "NWCategories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    CategoryID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreationTime = table.Column<DateTime>(nullable: false),
                     CreatorId = table.Column<Guid>(nullable: true),
@@ -20,13 +20,13 @@ namespace Abp.Northwind.Migrations
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
-                    CategoryName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Picture = table.Column<byte[]>(nullable: true)
+                    CategoryName = table.Column<string>(maxLength: 15, nullable: false),
+                    Description = table.Column<string>(type: "ntext", nullable: true),
+                    Picture = table.Column<byte[]>(type: "image", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NWCategories", x => x.Id);
+                    table.PrimaryKey("PK_NWCategories", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,7 +51,7 @@ namespace Abp.Northwind.Migrations
                         name: "FK_NWProducts_NWCategories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "NWCategories",
-                        principalColumn: "Id",
+                        principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Restrict);
                 });
 

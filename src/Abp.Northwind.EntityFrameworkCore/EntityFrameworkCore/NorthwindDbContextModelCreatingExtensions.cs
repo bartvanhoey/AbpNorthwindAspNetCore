@@ -18,6 +18,7 @@ namespace Abp.Northwind.EntityFrameworkCore
             {
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Categories", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
+                b.Property(e => e.Id).HasColumnName("CategoryID");
                 b.Property(c => c.CategoryName).IsRequired().HasMaxLength(15);
                 b.Property(c => c.Description).HasColumnType("ntext");
                 b.Property(c => c.Picture).HasColumnType("image");
@@ -29,22 +30,39 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ConfigureByConvention();
             });
 
-            builder.Entity<Supplier>(b =>
-            {
-                b.ToTable(NorthwindConsts.DbTablePrefix + "Suppliers", NorthwindConsts.DbSchema);
-                b.ConfigureByConvention();
-                b.Property(e => e.Address).HasMaxLength(60);
-                b.Property(e => e.City).HasMaxLength(15);
-                b.Property(e => e.CompanyName).IsRequired().HasMaxLength(40);
-                b.Property(e => e.ContactName).HasMaxLength(30);
-                b.Property(e => e.ContactTitle).HasMaxLength(30);
-                b.Property(e => e.Country).HasMaxLength(15);
-                b.Property(e => e.Fax).HasMaxLength(24);
-                b.Property(e => e.HomePage).HasColumnType("ntext");
-                b.Property(e => e.Phone).HasMaxLength(24);
-                b.Property(e => e.PostalCode).HasMaxLength(10);
-                b.Property(e => e.Region).HasMaxLength(15);
-            });
+//            builder.Entity<Supplier>(b =>
+//            {
+//                b.ToTable(NorthwindConsts.DbTablePrefix + "Suppliers", NorthwindConsts.DbSchema);
+//                b.ConfigureByConvention();
+//                b.Property(e => e.Address).HasMaxLength(60);
+//                b.Property(e => e.City).HasMaxLength(15);
+//                b.Property(e => e.CompanyName).IsRequired().HasMaxLength(40);
+//                b.Property(e => e.ContactName).HasMaxLength(30);
+//                b.Property(e => e.ContactTitle).HasMaxLength(30);
+//                b.Property(e => e.Country).HasMaxLength(15);
+//                b.Property(e => e.Fax).HasMaxLength(24);
+//                b.Property(e => e.HomePage).HasColumnType("ntext");
+//                b.Property(e => e.Phone).HasMaxLength(24);
+//                b.Property(e => e.PostalCode).HasMaxLength(10);
+//                b.Property(e => e.Region).HasMaxLength(15);
+//            });
+//
+//            builder.Entity<Customer>(b =>
+//            {
+//                b.ToTable(NorthwindConsts.DbTablePrefix + "Customers", NorthwindConsts.DbSchema);
+//                b.ConfigureByConvention();
+//                b.Property(e => e.Id).HasColumnName("CustomerID").HasMaxLength(5).ValueGeneratedNever();
+//                b.Property(e => e.Address).HasMaxLength(60);
+//                b.Property(e => e.City).HasMaxLength(15);
+//                b.Property(e => e.CompanyName).IsRequired().HasMaxLength(40);
+//                b.Property(e => e.ContactName).HasMaxLength(30);
+//                b.Property(e => e.ContactTitle).HasMaxLength(30);
+//                b.Property(e => e.Country).HasMaxLength(15);
+//                b.Property(e => e.Fax).HasMaxLength(24);
+//                b.Property(e => e.Phone).HasMaxLength(24);
+//                b.Property(e => e.PostalCode).HasMaxLength(10);
+//                b.Property(e => e.Region).HasMaxLength(15);
+//            });
         }
 
         public static void ConfigureCustomUserProperties<TUser>(this EntityTypeBuilder<TUser> b)

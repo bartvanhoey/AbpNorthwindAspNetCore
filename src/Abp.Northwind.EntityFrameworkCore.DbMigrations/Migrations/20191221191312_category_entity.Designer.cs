@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abp.Northwind.Migrations
 {
     [DbContext(typeof(NorthwindMigrationsDbContext))]
-    [Migration("20191221134714_category_entity_bis")]
-    partial class category_entity_bis
+    [Migration("20191221191312_category_entity")]
+    partial class category_entity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,7 @@ namespace Abp.Northwind.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("CategoryID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
