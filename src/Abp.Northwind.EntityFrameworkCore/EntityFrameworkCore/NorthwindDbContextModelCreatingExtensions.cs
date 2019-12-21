@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Abp.Northwind.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Users;
 
 namespace Abp.Northwind.EntityFrameworkCore
@@ -13,12 +15,17 @@ namespace Abp.Northwind.EntityFrameworkCore
 
             /* Configure your own tables/entities inside here */
 
-            //builder.Entity<YourEntity>(b =>
-            //{
-            //    b.ToTable(NorthwindConsts.DbTablePrefix + "YourEntities", NorthwindConsts.DbSchema);
-
-            //    //...
-            //});
+            builder.Entity<Category>(b =>
+            {
+                b.ToTable(NorthwindConsts.DbTablePrefix + "Categories", NorthwindConsts.DbSchema);
+                b.ConfigureByConvention();
+            });
+            
+            builder.Entity<Product>(b =>
+            {
+                b.ToTable(NorthwindConsts.DbTablePrefix + "Products", NorthwindConsts.DbSchema);
+                b.ConfigureByConvention();
+            });
         }
 
         public static void ConfigureCustomUserProperties<TUser>(this EntityTypeBuilder<TUser> b)
