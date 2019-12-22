@@ -257,3 +257,4 @@ src/Abp.Northwind.Web.Host/Logs/*
 src/Abp.Northwind.IdentityServer/Logs/*
 src/Abp.Northwind.HttpApi.Host/Logs/*
 src/Abp.Northwind.HttpApi.Host/Logs/*
+src/Abp.Northwind.DbMigrator/Logs/*
