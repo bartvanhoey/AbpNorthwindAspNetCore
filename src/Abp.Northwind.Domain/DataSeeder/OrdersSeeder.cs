@@ -6,19 +6,19 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Abp.Northwind.DataSeeder
 {
-    public class RegionsSeeder : BaseSeeder, IDataSeedContributor, ITransientDependency
+    public class OrdersSeeder : BaseSeeder, IDataSeedContributor, ITransientDependency
     {
-        private readonly IRepository<Region, int> _repository;
+        private readonly IRepository<Order, int> _repository;
 
-        public RegionsSeeder(IRepository<Region, int> repository) => _repository = repository;
+        public OrdersSeeder(IRepository<Order, int> repository) => _repository = repository;
 
         public async Task SeedAsync(DataSeedContext context)
         {
             if (await _repository.GetCountAsync() <= 0)
             {
-                foreach (var region in Regions)
+                foreach (var order in Orders)
                 {
-                    await _repository.InsertAsync(region);
+                    await _repository.InsertAsync(order);
                 }
             }
         }

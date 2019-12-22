@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Abp.Northwind.DataSeeder
 {
-    public class TerritoriesSeeder : IDataSeedContributor, ITransientDependency
+    public class TerritoriesSeeder : BaseSeeder, IDataSeedContributor, ITransientDependency
     {
         private readonly IRepository<Territory, string> _repository;
         private readonly List<Territory> _territories = new List<Territory>();
