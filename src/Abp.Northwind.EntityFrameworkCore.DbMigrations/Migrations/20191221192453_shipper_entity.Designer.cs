@@ -4,14 +4,16 @@ using Abp.Northwind.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Abp.Northwind.Migrations
 {
     [DbContext(typeof(NorthwindMigrationsDbContext))]
-    partial class NorthwindMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191221192453_shipper_entity")]
+    partial class shipper_entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,137 +158,6 @@ namespace Abp.Northwind.Migrations
                     b.ToTable("NWCustomers");
                 });
 
-            modelBuilder.Entity("Abp.Northwind.Entities.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("EmployeeID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(60)")
-                        .HasMaxLength(60);
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(4)")
-                        .HasMaxLength(4);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
-                    b.Property<DateTime?>("HireDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("HomePhone")
-                        .HasColumnType("nvarchar(24)")
-                        .HasMaxLength(24);
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("ntext");
-
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("image");
-
-                    b.Property<string>("PhotoPath")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
-                    b.Property<string>("Region")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
-
-                    b.Property<int?>("ReportsTo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
-
-                    b.Property<string>("TitleOfCourtesy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReportsTo");
-
-                    b.ToTable("NWEmployees");
-                });
-
-            modelBuilder.Entity("Abp.Northwind.Entities.EmployeeTerritory", b =>
-                {
-                    b.Property<int>("EmployeeId")
-                        .HasColumnName("EmployeeID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TerritoryId")
-                        .HasColumnName("TerritoryID")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.HasKey("EmployeeId", "TerritoryId")
-                        .HasAnnotation("SqlServer:Clustered", false);
-
-                    b.HasIndex("TerritoryId");
-
-                    b.ToTable("NWEmployeeTerritories");
-                });
-
             modelBuilder.Entity("Abp.Northwind.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -364,8 +235,6 @@ namespace Abp.Northwind.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("EmployeeId");
-
                     b.HasIndex("ShipperId");
 
                     b.ToTable("Order");
@@ -421,53 +290,6 @@ namespace Abp.Northwind.Migrations
                     b.HasIndex("SupplierId");
 
                     b.ToTable("NWProducts");
-                });
-
-            modelBuilder.Entity("Abp.Northwind.Entities.Region", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnName("RegionID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("RegionDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id")
-                        .HasAnnotation("SqlServer:Clustered", false);
-
-                    b.ToTable("NWRegions");
                 });
 
             modelBuilder.Entity("Abp.Northwind.Entities.Shipper", b =>
@@ -607,60 +429,6 @@ namespace Abp.Northwind.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("NWSuppliers");
-                });
-
-            modelBuilder.Entity("Abp.Northwind.Entities.Territory", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnName("TerritoryID")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnName("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnName("CreatorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnName("DeleterId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnName("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnName("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnName("LastModifierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("RegionId")
-                        .HasColumnName("RegionID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TerritoryDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id")
-                        .HasAnnotation("SqlServer:Clustered", false);
-
-                    b.HasIndex("RegionId");
-
-                    b.ToTable("NWTerritories");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -2119,38 +1887,11 @@ namespace Abp.Northwind.Migrations
                     b.ToTable("AbpTenantConnectionStrings");
                 });
 
-            modelBuilder.Entity("Abp.Northwind.Entities.Employee", b =>
-                {
-                    b.HasOne("Abp.Northwind.Entities.Employee", "Manager")
-                        .WithMany("DirectReports")
-                        .HasForeignKey("ReportsTo")
-                        .HasConstraintName("FK_Employees_Employees");
-                });
-
-            modelBuilder.Entity("Abp.Northwind.Entities.EmployeeTerritory", b =>
-                {
-                    b.HasOne("Abp.Northwind.Entities.Employee", "Employee")
-                        .WithMany("EmployeeTerritories")
-                        .HasForeignKey("EmployeeId")
-                        .HasConstraintName("FK_EmployeeTerritories_Employees")
-                        .IsRequired();
-
-                    b.HasOne("Abp.Northwind.Entities.Territory", "Territory")
-                        .WithMany("EmployeeTerritories")
-                        .HasForeignKey("TerritoryId")
-                        .HasConstraintName("FK_EmployeeTerritories_Territories")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Abp.Northwind.Entities.Order", b =>
                 {
                     b.HasOne("Abp.Northwind.Entities.Customer", null)
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId");
-
-                    b.HasOne("Abp.Northwind.Entities.Employee", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("Abp.Northwind.Entities.Shipper", null)
                         .WithMany("Orders")
@@ -2166,15 +1907,6 @@ namespace Abp.Northwind.Migrations
                     b.HasOne("Abp.Northwind.Entities.Supplier", null)
                         .WithMany("Products")
                         .HasForeignKey("SupplierId");
-                });
-
-            modelBuilder.Entity("Abp.Northwind.Entities.Territory", b =>
-                {
-                    b.HasOne("Abp.Northwind.Entities.Region", "Region")
-                        .WithMany("Territories")
-                        .HasForeignKey("RegionId")
-                        .HasConstraintName("FK_Territories_Region")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>

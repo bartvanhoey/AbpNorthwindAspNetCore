@@ -23,9 +23,16 @@ namespace Abp.Northwind.EntityFrameworkCore
         public DbSet<AppUser> Users { get; set; }
         
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeTerritory> EmployeeTerritories { get; set; }
         public DbSet<Product> Products { get; set; }
-//        public DbSet<Supplier> Suppliers { get; set; }
-//        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Shipper> Shippers { get; set; }
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<Territory> Territories { get; set; }
+
+
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside NorthwindDbContextModelCreatingExtensions.ConfigureNorthwind

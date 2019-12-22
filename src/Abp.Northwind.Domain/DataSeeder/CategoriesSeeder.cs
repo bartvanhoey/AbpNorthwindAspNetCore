@@ -11,24 +11,24 @@ namespace Abp.Northwind.DataSeeder
 
     namespace Abp.Northwind.DataSeeder
     {
-        public class CategoriesDataSeedContributor : IDataSeedContributor, ITransientDependency
+        public class CategoriesSeeder : IDataSeedContributor, ITransientDependency
         {
-            private readonly IRepository<Category, int> _repo;
+            private readonly IRepository<Category, int> _repository;
             private readonly Dictionary<int, Category> _categories = new Dictionary<int, Category>();
 
-            public CategoriesDataSeedContributor(IRepository<Category, int> repo)
+            public CategoriesSeeder(IRepository<Category, int> repository)
             {
-                _repo = repo;
+                _repository = repository;
                 AddCategories();
             }
 
             public async Task SeedAsync(DataSeedContext context)
             {
-                if (await _repo.GetCountAsync() <= 0)
+                if (await _repository.GetCountAsync() <= 0)
                 {
                     foreach (var category in _categories.Values)
                     {
-                        await _repo.InsertAsync(category);
+                        await _repository.InsertAsync(category);
                     }
                 }
             }
