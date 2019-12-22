@@ -1,11 +1,15 @@
 using System;
+using System.Collections.Generic;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Abp.Northwind.Entities
 {
     public class Order: FullAuditedEntity<int>
     {
-        public int OrderId { get; set; }
+        public Order()
+        {
+            OrderDetails = new HashSet<OrderDetail>();
+        }
         public string CustomerId { get; set; }
         public int? EmployeeId { get; set; }
         public DateTime? OrderDate { get; set; }
@@ -19,5 +23,10 @@ namespace Abp.Northwind.Entities
         public string ShipRegion { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
+
+        public Customer Customer { get; set; }
+        public Employee Employee { get; set; }
+        public Shipper Shipper { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; private set; }
     }
 }

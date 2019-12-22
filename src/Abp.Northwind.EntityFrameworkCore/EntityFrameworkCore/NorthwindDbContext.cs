@@ -31,8 +31,8 @@ namespace Abp.Northwind.EntityFrameworkCore
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Territory> Territories { get; set; }
-
-
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside NorthwindDbContextModelCreatingExtensions.ConfigureNorthwind

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abp.Northwind.Migrations
 {
     [DbContext(typeof(NorthwindMigrationsDbContext))]
-    [Migration("20191221192453_shipper_entity")]
-    partial class shipper_entity
+    [Migration("20191222081954_northwinddb")]
+    partial class northwinddb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -158,96 +158,415 @@ namespace Abp.Northwind.Migrations
                     b.ToTable("NWCustomers");
                 });
 
+            modelBuilder.Entity("Abp.Northwind.Entities.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("EmployeeID")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnName("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnName("DeleterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnName("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(4)")
+                        .HasMaxLength(4);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
+                    b.Property<DateTime?>("HireDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("HomePhone")
+                        .HasColumnType("nvarchar(24)")
+                        .HasMaxLength(24);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnName("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnName("LastModifierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("ntext");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("image");
+
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
+                    b.Property<string>("Region")
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
+                    b.Property<int?>("ReportsTo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("TitleOfCourtesy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReportsTo");
+
+                    b.ToTable("NWEmployees");
+                });
+
+            modelBuilder.Entity("Abp.Northwind.Entities.EmployeeTerritory", b =>
+                {
+                    b.Property<int>("EmployeeId")
+                        .HasColumnName("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TerritoryId")
+                        .HasColumnName("TerritoryID")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnName("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnName("DeleterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnName("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnName("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnName("LastModifierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("EmployeeId", "TerritoryId")
+                        .HasAnnotation("SqlServer:Clustered", false);
+
+                    b.HasIndex("TerritoryId");
+
+                    b.ToTable("NWEmployeeTerritories");
+                });
+
             modelBuilder.Entity("Abp.Northwind.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("OrderID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreationTime")
+                        .HasColumnName("CreationTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CreatorId")
+                        .HasColumnName("CreatorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnName("CustomerID")
+                        .HasColumnType("nvarchar(5)")
+                        .HasMaxLength(5);
 
                     b.Property<Guid?>("DeleterId")
+                        .HasColumnName("DeleterId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DeletionTime")
+                        .HasColumnName("DeletionTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("EmployeeId")
+                        .HasColumnName("EmployeeID")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Freight")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValueSql("((0))");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnName("LastModificationTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("LastModifierId")
+                        .HasColumnName("LastModifierId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime?>("RequiredDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("ShipAddress")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<string>("ShipCity")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<string>("ShipCountry")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<string>("ShipName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.Property<string>("ShipPostalCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<string>("ShipRegion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<int?>("ShipVia")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ShippedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ShipperId")
-                        .HasColumnType("int");
+                        .HasColumnType("datetime");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("ShipperId");
+                    b.HasIndex("EmployeeId");
 
-                    b.ToTable("Order");
+                    b.HasIndex("ShipVia");
+
+                    b.ToTable("NWOrders");
+                });
+
+            modelBuilder.Entity("Abp.Northwind.Entities.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnName("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnName("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnName("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnName("DeleterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnName("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("Discount")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnName("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnName("LastModifierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<short>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("money");
+
+                    b.HasKey("OrderId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("NWOrderDetails");
                 });
 
             modelBuilder.Entity("Abp.Northwind.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("ProductID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("CategoryId")
+                        .HasColumnName("CategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnName("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnName("DeleterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnName("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Discontinued")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnName("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnName("LastModifierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
+
+                    b.Property<string>("QuantityPerUnit")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<short?>("ReorderLevel")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<int?>("SupplierId")
+                        .HasColumnName("SupplierID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("UnitPrice")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("money")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<short?>("UnitsInStock")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint")
+                        .HasDefaultValueSql("((0))");
+
+                    b.Property<short?>("UnitsOnOrder")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint")
+                        .HasDefaultValueSql("((0))");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("NWProducts");
+                });
+
+            modelBuilder.Entity("Abp.Northwind.Entities.Region", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnName("RegionID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationTime")
@@ -280,16 +599,15 @@ namespace Abp.Northwind.Migrations
                         .HasColumnName("LastModifierId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
+                    b.Property<string>("RegionDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasAnnotation("SqlServer:Clustered", false);
 
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("NWProducts");
+                    b.ToTable("NWRegions");
                 });
 
             modelBuilder.Entity("Abp.Northwind.Entities.Shipper", b =>
@@ -429,6 +747,60 @@ namespace Abp.Northwind.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("NWSuppliers");
+                });
+
+            modelBuilder.Entity("Abp.Northwind.Entities.Territory", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnName("TerritoryID")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnName("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnName("DeleterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnName("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnName("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnName("LastModifierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("RegionId")
+                        .HasColumnName("RegionID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TerritoryDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id")
+                        .HasAnnotation("SqlServer:Clustered", false);
+
+                    b.HasIndex("RegionId");
+
+                    b.ToTable("NWTerritories");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -1887,26 +2259,78 @@ namespace Abp.Northwind.Migrations
                     b.ToTable("AbpTenantConnectionStrings");
                 });
 
+            modelBuilder.Entity("Abp.Northwind.Entities.Employee", b =>
+                {
+                    b.HasOne("Abp.Northwind.Entities.Employee", "Manager")
+                        .WithMany("DirectReports")
+                        .HasForeignKey("ReportsTo")
+                        .HasConstraintName("FK_Employees_Employees");
+                });
+
+            modelBuilder.Entity("Abp.Northwind.Entities.EmployeeTerritory", b =>
+                {
+                    b.HasOne("Abp.Northwind.Entities.Employee", "Employee")
+                        .WithMany("EmployeeTerritories")
+                        .HasForeignKey("EmployeeId")
+                        .HasConstraintName("FK_EmployeeTerritories_Employees")
+                        .IsRequired();
+
+                    b.HasOne("Abp.Northwind.Entities.Territory", "Territory")
+                        .WithMany("EmployeeTerritories")
+                        .HasForeignKey("TerritoryId")
+                        .HasConstraintName("FK_EmployeeTerritories_Territories")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Abp.Northwind.Entities.Order", b =>
                 {
-                    b.HasOne("Abp.Northwind.Entities.Customer", null)
+                    b.HasOne("Abp.Northwind.Entities.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("Abp.Northwind.Entities.Shipper", null)
+                    b.HasOne("Abp.Northwind.Entities.Employee", "Employee")
                         .WithMany("Orders")
-                        .HasForeignKey("ShipperId");
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("Abp.Northwind.Entities.Shipper", "Shipper")
+                        .WithMany("Orders")
+                        .HasForeignKey("ShipVia")
+                        .HasConstraintName("FK_Orders_Shippers");
+                });
+
+            modelBuilder.Entity("Abp.Northwind.Entities.OrderDetail", b =>
+                {
+                    b.HasOne("Abp.Northwind.Entities.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
+                        .HasConstraintName("FK_Order_Details_Orders")
+                        .IsRequired();
+
+                    b.HasOne("Abp.Northwind.Entities.Product", "Product")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductId")
+                        .HasConstraintName("FK_Order_Details_Products")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Abp.Northwind.Entities.Product", b =>
                 {
-                    b.HasOne("Abp.Northwind.Entities.Category", null)
+                    b.HasOne("Abp.Northwind.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("Abp.Northwind.Entities.Supplier", null)
+                    b.HasOne("Abp.Northwind.Entities.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierId");
+                });
+
+            modelBuilder.Entity("Abp.Northwind.Entities.Territory", b =>
+                {
+                    b.HasOne("Abp.Northwind.Entities.Region", "Region")
+                        .WithMany("Territories")
+                        .HasForeignKey("RegionId")
+                        .HasConstraintName("FK_Territories_Region")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>

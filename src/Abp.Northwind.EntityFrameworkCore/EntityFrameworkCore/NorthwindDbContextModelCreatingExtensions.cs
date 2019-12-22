@@ -134,6 +134,58 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.HasOne(d => d.Manager).WithMany(p => p.DirectReports).HasForeignKey(d => d.ReportsTo)
                     .HasConstraintName("FK_Employees_Employees");
             });
+
+            builder.Entity<Product>(b =>
+            {
+                b.ToTable(NorthwindConsts.DbTablePrefix + "Products", NorthwindConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(e => e.Id).HasColumnName("ProductID");
+                b.Property(e => e.CategoryId).HasColumnName("CategoryID");
+                b.Property(e => e.ProductName).IsRequired().HasMaxLength(40);
+                b.Property(e => e.QuantityPerUnit).HasMaxLength(20);
+                b.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
+                b.Property(e => e.SupplierId).HasColumnName("SupplierID");
+                b.Property(e => e.UnitPrice).HasColumnType("money").HasDefaultValueSql("((0))");
+                b.Property(e => e.UnitsInStock).HasDefaultValueSql("((0))");
+                b.Property(e => e.UnitsOnOrder).HasDefaultValueSql("((0))");
+            });
+
+            builder.Entity<Order>(b =>
+            {
+                b.ToTable(NorthwindConsts.DbTablePrefix + "Orders", NorthwindConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(e => e.Id).HasColumnName("OrderID");
+                b.Property(e => e.CustomerId).HasColumnName("CustomerID").HasMaxLength(5);
+                b.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+                b.Property(e => e.Freight).HasColumnType("money").HasDefaultValueSql("((0))");
+                b.Property(e => e.OrderDate).HasColumnType("datetime");
+                b.Property(e => e.RequiredDate).HasColumnType("datetime");
+                b.Property(e => e.ShipAddress).HasMaxLength(60);
+                b.Property(e => e.ShipCity).HasMaxLength(15);
+                b.Property(e => e.ShipCountry).HasMaxLength(15);
+                b.Property(e => e.ShipName).HasMaxLength(40);
+                b.Property(e => e.ShipPostalCode).HasMaxLength(10);
+                b.Property(e => e.ShipRegion).HasMaxLength(15);
+                b.Property(e => e.ShippedDate).HasColumnType("datetime");
+                b.HasOne(d => d.Shipper).WithMany(p => p.Orders).HasForeignKey(d => d.ShipVia)
+                    .HasConstraintName("FK_Orders_Shippers");
+            });
+
+            builder.Entity<OrderDetail>(builder =>
+            {
+                builder.ToTable(NorthwindConsts.DbTablePrefix + "OrderDetails", NorthwindConsts.DbSchema);
+                builder.ConfigureByConvention();
+                builder.HasKey(e => new {e.OrderId, e.ProductId});
+//                builder.ToTable("Order Details");
+                builder.Property(e => e.OrderId).HasColumnName("OrderID");
+                builder.Property(e => e.ProductId).HasColumnName("ProductID");
+                builder.Property(e => e.Quantity).HasDefaultValueSql("((1))");
+                builder.Property(e => e.UnitPrice).HasColumnType("money");
+                builder.HasOne(d => d.Order).WithMany(p => p.OrderDetails).HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Order_Details_Orders");
+                builder.HasOne(d => d.Product).WithMany(p => p.OrderDetails).HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Order_Details_Products");
+            });
         }
 
         public static void ConfigureCustomUserProperties<TUser>(this EntityTypeBuilder<TUser> b)

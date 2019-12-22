@@ -1,8 +1,9 @@
 using Volo.Abp.Domain.Entities;
+using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Abp.Northwind.Entities
 {
-    public class EmployeeTerritory : Entity
+    public class EmployeeTerritory : FullAuditedEntity
     {
         public int EmployeeId { get; set; }
         public string TerritoryId { get; set; }
