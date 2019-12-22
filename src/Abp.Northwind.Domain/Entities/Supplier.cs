@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.MultiTenancy;
 
 namespace Abp.Northwind.Entities
 {
-    public class Supplier : FullAuditedEntity<int>
+    public class Supplier : FullAuditedEntity<int>, IMultiTenant
     {
         public Supplier()
         {
@@ -24,5 +26,6 @@ namespace Abp.Northwind.Entities
 
         public ICollection<Product> Products { get; private set; }
 
+        public Guid? TenantId { get; }
     }
 }

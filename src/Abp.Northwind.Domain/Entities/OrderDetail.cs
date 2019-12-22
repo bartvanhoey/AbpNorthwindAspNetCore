@@ -1,10 +1,12 @@
 
+using System;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.MultiTenancy;
 
 namespace Abp.Northwind.Entities
 {
-    public class OrderDetail: FullAuditedEntity
+    public class OrderDetail: FullAuditedEntity, IMultiTenant
     {
         public int OrderId { get; set; }
         public int ProductId { get; set; }
@@ -18,5 +20,7 @@ namespace Abp.Northwind.Entities
         {
             return new object[] { OrderId, ProductId};
         }
+
+        public Guid? TenantId { get; }
     }
 }

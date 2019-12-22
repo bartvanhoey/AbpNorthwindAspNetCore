@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.MultiTenancy;
 
 namespace Abp.Northwind.Entities
 {
-    public class Order: FullAuditedEntity<int>
+    public class Order: FullAuditedEntity<int>, IMultiTenant
     {
         public Order()
         {
@@ -28,5 +29,6 @@ namespace Abp.Northwind.Entities
         public Employee Employee { get; set; }
         public Shipper Shipper { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; private set; }
+        public Guid? TenantId { get; }
     }
 }

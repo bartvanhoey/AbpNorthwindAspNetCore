@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.MultiTenancy;
 
 namespace Abp.Northwind.Entities
 {
-    public class Employee: FullAuditedEntity<int>
+    public class Employee: FullAuditedEntity<int>, IMultiTenant
     {
         public Employee()
         {
@@ -36,5 +37,6 @@ namespace Abp.Northwind.Entities
         public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
         public ICollection<Employee> DirectReports { get; private set; }
         public ICollection<Order> Orders { get; private set; }
+        public Guid? TenantId { get; }
     }
 }

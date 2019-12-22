@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.MultiTenancy;
 
 namespace Abp.Northwind.Entities
 {
-    public class Customer: FullAuditedEntity<string>
+    public class Customer: FullAuditedEntity<string>, IMultiTenant
     {
         public new string Id { get; set; }
         public string CompanyName { get; set; }
@@ -17,6 +19,7 @@ namespace Abp.Northwind.Entities
         public string Phone { get; set; }
         public string Fax { get; set; }
 
-        public ICollection<Order> Orders { get; private set; } 
+        public ICollection<Order> Orders { get; private set; }
+        public Guid? TenantId { get; }
     }
 }

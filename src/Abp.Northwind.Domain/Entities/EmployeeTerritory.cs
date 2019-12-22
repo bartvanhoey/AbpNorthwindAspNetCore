@@ -1,9 +1,11 @@
+using System;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.MultiTenancy;
 
 namespace Abp.Northwind.Entities
 {
-    public class EmployeeTerritory : FullAuditedEntity
+    public class EmployeeTerritory : FullAuditedEntity, IMultiTenant
     {
         public int EmployeeId { get; set; }
         public string TerritoryId { get; set; }
@@ -15,5 +17,7 @@ namespace Abp.Northwind.Entities
         {
             return new object[] {EmployeeId, TerritoryId};
         }
+
+        public Guid? TenantId { get; }
     }
 }
