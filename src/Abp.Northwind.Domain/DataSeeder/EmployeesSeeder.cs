@@ -5,7 +5,6 @@ using Abp.Northwind.Entities;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
-using static Abp.Northwind.Util;
 
 namespace Abp.Northwind.DataSeeder
 {

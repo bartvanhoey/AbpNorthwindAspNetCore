@@ -1,5 +1,4 @@
 using Abp.Northwind.Entities;
-using static Abp.Northwind.Util;
 
 namespace Abp.Northwind.DataSeeder
 {

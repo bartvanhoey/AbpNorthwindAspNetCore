@@ -171,19 +171,18 @@ namespace Abp.Northwind.EntityFrameworkCore
                     .HasConstraintName("FK_Orders_Shippers");
             });
 
-            builder.Entity<OrderDetail>(builder =>
+            builder.Entity<OrderDetail>(b =>
             {
-                builder.ToTable(NorthwindConsts.DbTablePrefix + "OrderDetails", NorthwindConsts.DbSchema);
-                builder.ConfigureByConvention();
-                builder.HasKey(e => new {e.OrderId, e.ProductId});
-//                builder.ToTable("Order Details");
-                builder.Property(e => e.OrderId).HasColumnName("OrderID");
-                builder.Property(e => e.ProductId).HasColumnName("ProductID");
-                builder.Property(e => e.Quantity).HasDefaultValueSql("((1))");
-                builder.Property(e => e.UnitPrice).HasColumnType("money");
-                builder.HasOne(d => d.Order).WithMany(p => p.OrderDetails).HasForeignKey(d => d.OrderId)
+                b.ToTable(NorthwindConsts.DbTablePrefix + "OrderDetails", NorthwindConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.HasKey(e => new {e.OrderId, e.ProductId});
+                b.Property(e => e.OrderId).HasColumnName("OrderID");
+                b.Property(e => e.ProductId).HasColumnName("ProductID");
+                b.Property(e => e.Quantity).HasDefaultValueSql("((1))");
+                b.Property(e => e.UnitPrice).HasColumnType("money");
+                b.HasOne(d => d.Order).WithMany(p => p.OrderDetails).HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Order_Details_Orders");
-                builder.HasOne(d => d.Product).WithMany(p => p.OrderDetails).HasForeignKey(d => d.ProductId)
+                b.HasOne(d => d.Product).WithMany(p => p.OrderDetails).HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_Order_Details_Products");
             });
         }

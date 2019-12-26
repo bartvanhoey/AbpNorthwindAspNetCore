@@ -1,19 +1,10 @@
 using System;
-using System.Collections.Generic;
-using Volo.Abp.Domain.Entities.Auditing;
-using Volo.Abp.MultiTenancy;
+using Volo.Abp.Application.Dtos;
 
-namespace Abp.Northwind.Entities
+namespace Abp.Northwind.ApplicationServices.Employees.Dtos
 {
-    public class Employee : FullAuditedEntity<int>, IMultiTenant
+    public class EmployeeDto: AuditedEntityDto<int>
     {
-        public Employee()
-        {
-            EmployeeTerritories = new HashSet<EmployeeTerritory>();
-            DirectReports = new HashSet<Employee>();
-            Orders = new HashSet<Order>();
-        }
-
         public string UserId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -32,11 +23,5 @@ namespace Abp.Northwind.Entities
         public string Notes { get; set; }
         public int? ReportsTo { get; set; }
         public string PhotoPath { get; set; }
-        
-        public Guid? TenantId { get; }
-        public Employee Manager { get; set; }
-        public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
-        public ICollection<Employee> DirectReports { get; private set; }
-        public ICollection<Order> Orders { get; private set; }
     }
 }

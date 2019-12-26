@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Abp.Northwind.Entities;
-using static Abp.Northwind.Util;
 
 namespace Abp.Northwind.DataSeeder
 {
@@ -17193,6 +17193,14 @@ namespace Abp.Northwind.DataSeeder
             });
         }
 
+        private static byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                .Where(x => x % 2 == 0)
+                .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                .ToArray();
+        }
+
         private void AddCustomers()
         {
             Customers.AddRange(new[]
@@ -18084,6 +18092,8 @@ namespace Abp.Northwind.DataSeeder
                     }
                 });
         }
+        
+  
     }
 
     internal static class OrderExtensions
