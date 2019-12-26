@@ -152,8 +152,8 @@ namespace Abp.Northwind.Migrations
                         .HasMaxLength(10);
 
                     b.Property<string>("Region")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnName("TenantId")

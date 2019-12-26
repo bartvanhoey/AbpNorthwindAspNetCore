@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Users;
+using static Abp.Northwind.NorthwindSharedDomainConstants.CategoryConsts;
+using static Abp.Northwind.NorthwindSharedDomainConstants.CustomerConsts;
 
 namespace Abp.Northwind.EntityFrameworkCore
 {
@@ -19,15 +21,24 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Categories", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
                 b.Property(e => e.Id).HasColumnName("CategoryID");
-                b.Property(c => c.CategoryName).IsRequired().HasMaxLength(15);
-                b.Property(c => c.Description).HasColumnType("ntext");
-                b.Property(c => c.Picture).HasColumnType("image");
+                b.Property(e => e.CategoryName).IsRequired().HasMaxLength(MaxLengthCategoryName);
+                b.Property(e => e.Description).HasColumnType("ntext");
+                b.Property(e => e.Picture).HasColumnType("image");
             });
 
             builder.Entity<Product>(b =>
             {
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Products", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
+                b.Property(e => e.Id).HasColumnName("ProductID");
+                b.Property(e => e.CategoryId).HasColumnName("CategoryID");
+                b.Property(e => e.ProductName).IsRequired().HasMaxLength(40);
+                b.Property(e => e.QuantityPerUnit).HasMaxLength(20);
+                b.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
+                b.Property(e => e.SupplierId).HasColumnName("SupplierID");
+                b.Property(e => e.UnitPrice).HasColumnType("money").HasDefaultValueSql("((0))");
+                b.Property(e => e.UnitsInStock).HasDefaultValueSql("((0))");
+                b.Property(e => e.UnitsOnOrder).HasDefaultValueSql("((0))");
             });
 
             builder.Entity<Supplier>(b =>
@@ -53,16 +64,16 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Customers", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
                 b.Property(e => e.Id).HasColumnName("CustomerID").HasMaxLength(5).ValueGeneratedNever();
-                b.Property(e => e.Address).HasMaxLength(60);
-                b.Property(e => e.City).HasMaxLength(15);
-                b.Property(e => e.CompanyName).IsRequired().HasMaxLength(40);
-                b.Property(e => e.ContactName).HasMaxLength(30);
-                b.Property(e => e.ContactTitle).HasMaxLength(30);
-                b.Property(e => e.Country).HasMaxLength(15);
-                b.Property(e => e.Fax).HasMaxLength(24);
-                b.Property(e => e.Phone).HasMaxLength(24);
-                b.Property(e => e.PostalCode).HasMaxLength(10);
-                b.Property(e => e.Region).HasMaxLength(15);
+                b.Property(e => e.Address).HasMaxLength(MaxLengthAddress);
+                b.Property(e => e.City).HasMaxLength(MaxLengthCity);
+                b.Property(e => e.CompanyName).IsRequired().HasMaxLength(MaxLengthCompanyName);
+                b.Property(e => e.ContactName).HasMaxLength(MaxLengthContactName);
+                b.Property(e => e.ContactTitle).HasMaxLength(MaxLengthContactTitle);
+                b.Property(e => e.Country).HasMaxLength(MaxLengthCountry);
+                b.Property(e => e.Fax).HasMaxLength(MaxLengthFax);
+                b.Property(e => e.Phone).HasMaxLength(MaxLengthPhone);
+                b.Property(e => e.PostalCode).HasMaxLength(MaxLengthPostalCode);
+                b.Property(e => e.Region).HasMaxLength(MaxLengthRegion);
             });
 
             builder.Entity<Shipper>(b =>

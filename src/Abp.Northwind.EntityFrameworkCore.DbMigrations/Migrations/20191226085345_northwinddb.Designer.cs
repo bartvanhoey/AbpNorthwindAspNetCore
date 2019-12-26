@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abp.Northwind.Migrations
 {
     [DbContext(typeof(NorthwindMigrationsDbContext))]
-    [Migration("20191222192951_implement_multitenancy")]
-    partial class implement_multitenancy
+    [Migration("20191226085345_northwinddb")]
+    partial class northwinddb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -154,8 +154,8 @@ namespace Abp.Northwind.Migrations
                         .HasMaxLength(10);
 
                     b.Property<string>("Region")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(60)")
+                        .HasMaxLength(60);
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnName("TenantId")

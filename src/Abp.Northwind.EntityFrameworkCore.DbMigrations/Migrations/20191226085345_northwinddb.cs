@@ -22,7 +22,8 @@ namespace Abp.Northwind.Migrations
                     DeletionTime = table.Column<DateTime>(nullable: true),
                     CategoryName = table.Column<string>(maxLength: 15, nullable: false),
                     Description = table.Column<string>(type: "ntext", nullable: true),
-                    Picture = table.Column<byte[]>(type: "image", nullable: true)
+                    Picture = table.Column<byte[]>(type: "image", nullable: true),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,11 +47,12 @@ namespace Abp.Northwind.Migrations
                     ContactTitle = table.Column<string>(maxLength: 30, nullable: true),
                     Address = table.Column<string>(maxLength: 60, nullable: true),
                     City = table.Column<string>(maxLength: 15, nullable: true),
-                    Region = table.Column<string>(maxLength: 15, nullable: true),
+                    Region = table.Column<string>(maxLength: 60, nullable: true),
                     PostalCode = table.Column<string>(maxLength: 10, nullable: true),
                     Country = table.Column<string>(maxLength: 15, nullable: true),
                     Phone = table.Column<string>(maxLength: 24, nullable: true),
-                    Fax = table.Column<string>(maxLength: 24, nullable: true)
+                    Fax = table.Column<string>(maxLength: 24, nullable: true),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,7 +89,8 @@ namespace Abp.Northwind.Migrations
                     Photo = table.Column<byte[]>(type: "image", nullable: true),
                     Notes = table.Column<string>(type: "ntext", nullable: true),
                     ReportsTo = table.Column<int>(nullable: true),
-                    PhotoPath = table.Column<string>(maxLength: 255, nullable: true)
+                    PhotoPath = table.Column<string>(maxLength: 255, nullable: true),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,7 +115,8 @@ namespace Abp.Northwind.Migrations
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
-                    RegionDescription = table.Column<string>(maxLength: 50, nullable: false)
+                    RegionDescription = table.Column<string>(maxLength: 50, nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -134,7 +138,8 @@ namespace Abp.Northwind.Migrations
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
                     CompanyName = table.Column<string>(maxLength: 40, nullable: false),
-                    Phone = table.Column<string>(maxLength: 24, nullable: true)
+                    Phone = table.Column<string>(maxLength: 24, nullable: true),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -164,7 +169,8 @@ namespace Abp.Northwind.Migrations
                     Country = table.Column<string>(maxLength: 15, nullable: true),
                     Phone = table.Column<string>(maxLength: 24, nullable: true),
                     Fax = table.Column<string>(maxLength: 24, nullable: true),
-                    HomePage = table.Column<string>(type: "ntext", nullable: true)
+                    HomePage = table.Column<string>(type: "ntext", nullable: true),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,7 +190,8 @@ namespace Abp.Northwind.Migrations
                     DeleterId = table.Column<Guid>(nullable: true),
                     DeletionTime = table.Column<DateTime>(nullable: true),
                     TerritoryDescription = table.Column<string>(maxLength: 50, nullable: false),
-                    RegionID = table.Column<int>(nullable: false)
+                    RegionID = table.Column<int>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -223,7 +230,8 @@ namespace Abp.Northwind.Migrations
                     ShipCity = table.Column<string>(maxLength: 15, nullable: true),
                     ShipRegion = table.Column<string>(maxLength: 15, nullable: true),
                     ShipPostalCode = table.Column<string>(maxLength: 10, nullable: true),
-                    ShipCountry = table.Column<string>(maxLength: 15, nullable: true)
+                    ShipCountry = table.Column<string>(maxLength: 15, nullable: true),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -269,7 +277,8 @@ namespace Abp.Northwind.Migrations
                     UnitsInStock = table.Column<short>(nullable: true, defaultValueSql: "((0))"),
                     UnitsOnOrder = table.Column<short>(nullable: true, defaultValueSql: "((0))"),
                     ReorderLevel = table.Column<short>(nullable: true, defaultValueSql: "((0))"),
-                    Discontinued = table.Column<bool>(nullable: false)
+                    Discontinued = table.Column<bool>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -300,7 +309,8 @@ namespace Abp.Northwind.Migrations
                     LastModifierId = table.Column<Guid>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(nullable: true),
-                    DeletionTime = table.Column<DateTime>(nullable: true)
+                    DeletionTime = table.Column<DateTime>(nullable: true),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -335,7 +345,8 @@ namespace Abp.Northwind.Migrations
                     DeletionTime = table.Column<DateTime>(nullable: true),
                     UnitPrice = table.Column<decimal>(type: "money", nullable: false),
                     Quantity = table.Column<short>(nullable: false, defaultValueSql: "((1))"),
-                    Discount = table.Column<float>(nullable: false)
+                    Discount = table.Column<float>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
