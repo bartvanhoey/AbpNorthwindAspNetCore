@@ -6,9 +6,10 @@ using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Users;
 using static Abp.Northwind.NorthwindSharedDomainConstants;
 using static Abp.Northwind.NorthwindSharedDomainConstants.CategoryConsts;
-using static Abp.Northwind.NorthwindSharedDomainConstants.CustomerConsts;
+using static Abp.Northwind.NorthwindSharedDomainConstants.OrderConsts;
 using static Abp.Northwind.NorthwindSharedDomainConstants.ProductConsts;
-using static Abp.Northwind.NorthwindSharedDomainConstants.SupplierConsts;
+using static Abp.Northwind.NorthwindSharedDomainConstants.RegionConsts;
+using static Abp.Northwind.NorthwindSharedDomainConstants.TerritoryConsts;
 
 namespace Abp.Northwind.EntityFrameworkCore
 {
@@ -35,7 +36,7 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ConfigureByConvention();
                 b.Property(e => e.Id).HasColumnName("ProductID");
                 b.Property(e => e.CategoryId).HasColumnName("CategoryID");
-                b.Property(e => e.ProductName).IsRequired().HasMaxLength(maxLength: MaxLengthProductName);
+                b.Property(e => e.ProductName).IsRequired().HasMaxLength(MaxLengthProductName);
                 b.Property(e => e.QuantityPerUnit).HasMaxLength(MaxLengthQuantityPerUnit);
                 b.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
                 b.Property(e => e.SupplierId).HasColumnName("SupplierID");
@@ -84,8 +85,8 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Shippers", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
                 b.Property(e => e.Id).HasColumnName("ShipperID");
-                b.Property(e => e.CompanyName).IsRequired().HasMaxLength(40);
-                b.Property(e => e.Phone).HasMaxLength(24);
+                b.Property(e => e.CompanyName).IsRequired().HasMaxLength(ShipperConsts.MaxLengthCompanyName);
+                b.Property(e => e.Phone).HasMaxLength(ShipperConsts.MaxLengthCompanyName);
             });
 
             builder.Entity<Region>(b =>
@@ -94,7 +95,7 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ConfigureByConvention();
                 b.HasKey(e => e.Id).IsClustered(false);
                 b.Property(e => e.Id).HasColumnName("RegionID").ValueGeneratedNever();
-                b.Property(e => e.RegionDescription).IsRequired().HasMaxLength(50);
+                b.Property(e => e.RegionDescription).IsRequired().HasMaxLength(MaxLengthRegionDescription);
             });
 
             builder.Entity<Territory>(b =>
@@ -102,9 +103,9 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Territories", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
                 b.HasKey(e => e.Id).IsClustered(false);
-                b.Property(e => e.Id).HasColumnName("TerritoryID").HasMaxLength(20).ValueGeneratedNever();
+                b.Property(e => e.Id).HasColumnName("TerritoryID").HasMaxLength(TerritoryConsts.MaxLengthTerritoryId).ValueGeneratedNever();
                 b.Property(e => e.RegionId).HasColumnName("RegionID");
-                b.Property(e => e.TerritoryDescription).IsRequired().HasMaxLength(50);
+                b.Property(e => e.TerritoryDescription).IsRequired().HasMaxLength(MaxLengthTerritoryDescription);
                 b.HasOne(d => d.Region)
                     .WithMany(p => p.Territories)
                     .HasForeignKey(d => d.RegionId)
@@ -118,7 +119,7 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ConfigureByConvention();
                 b.HasKey(e => new {e.EmployeeId, e.TerritoryId}).IsClustered(false);
                 b.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
-                b.Property(e => e.TerritoryId).HasColumnName("TerritoryID").HasMaxLength(20);
+                b.Property(e => e.TerritoryId).HasColumnName("TerritoryID").HasMaxLength(EmployeeTerritoryConsts.MaxLengthTerritoryId);
                 b.HasOne(d => d.Employee).WithMany(p => p.EmployeeTerritories).HasForeignKey(d => d.EmployeeId)
                     .OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_EmployeeTerritories_Employees");
                 b.HasOne(d => d.Territory).WithMany(p => p.EmployeeTerritories).HasForeignKey(d => d.TerritoryId)
@@ -130,39 +131,39 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Employees", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
                 b.Property(e => e.Id).HasColumnName("EmployeeID");
-                b.Property(e => e.Address).HasMaxLength(60);
+                b.Property(e => e.Address).HasMaxLength(EmployeeConsts.MaxLengthAddress);
                 b.Property(e => e.BirthDate).HasColumnType("datetime");
-                b.Property(e => e.City).HasMaxLength(15);
-                b.Property(e => e.Country).HasMaxLength(15);
-                b.Property(e => e.Extension).HasMaxLength(4);
-                b.Property(e => e.FirstName).IsRequired().HasMaxLength(10);
+                b.Property(e => e.City).HasMaxLength(EmployeeConsts.MaxLengthCity);
+                b.Property(e => e.Country).HasMaxLength(EmployeeConsts.MaxLengthCountry);
+                b.Property(e => e.Extension).HasMaxLength(EmployeeConsts.MaxLengthExtension);
+                b.Property(e => e.FirstName).IsRequired().HasMaxLength(EmployeeConsts.MaxLengthFirstName);
                 b.Property(e => e.HireDate).HasColumnType("datetime");
-                b.Property(e => e.HomePhone).HasMaxLength(24);
-                b.Property(e => e.LastName).IsRequired().HasMaxLength(20);
+                b.Property(e => e.HomePhone).HasMaxLength(EmployeeConsts.MaxLengthHomePhone);
+                b.Property(e => e.LastName).IsRequired().HasMaxLength(EmployeeConsts.MaxLengthLastName);
                 b.Property(e => e.Notes).HasColumnType("ntext");
                 b.Property(e => e.Photo).HasColumnType("image");
-                b.Property(e => e.PhotoPath).HasMaxLength(255);
-                b.Property(e => e.PostalCode).HasMaxLength(10);
-                b.Property(e => e.Region).HasMaxLength(15);
-                b.Property(e => e.Title).HasMaxLength(30);
+                b.Property(e => e.PhotoPath).HasMaxLength(EmployeeConsts.MaxLengthPhotoPath);
+                b.Property(e => e.PostalCode).HasMaxLength(EmployeeConsts.MaxLengthPostalCode);
+                b.Property(e => e.Region).HasMaxLength(EmployeeConsts.MaxLengthRegion);
+                b.Property(e => e.Title).HasMaxLength(EmployeeConsts.MaxLengthTitle);
                 b.HasOne(d => d.Manager).WithMany(p => p.DirectReports).HasForeignKey(d => d.ReportsTo)
                     .HasConstraintName("FK_Employees_Employees");
             });
 
-            builder.Entity<Product>(b =>
-            {
-                b.ToTable(NorthwindConsts.DbTablePrefix + "Products", NorthwindConsts.DbSchema);
-                b.ConfigureByConvention();
-                b.Property(e => e.Id).HasColumnName("ProductID");
-                b.Property(e => e.CategoryId).HasColumnName("CategoryID");
-                b.Property(e => e.ProductName).IsRequired().HasMaxLength(40);
-                b.Property(e => e.QuantityPerUnit).HasMaxLength(20);
-                b.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
-                b.Property(e => e.SupplierId).HasColumnName("SupplierID");
-                b.Property(e => e.UnitPrice).HasColumnType("money").HasDefaultValueSql("((0))");
-                b.Property(e => e.UnitsInStock).HasDefaultValueSql("((0))");
-                b.Property(e => e.UnitsOnOrder).HasDefaultValueSql("((0))");
-            });
+//            builder.Entity<Product>(b =>
+//            {
+//                b.ToTable(NorthwindConsts.DbTablePrefix + "Products", NorthwindConsts.DbSchema);
+//                b.ConfigureByConvention();
+//                b.Property(e => e.Id).HasColumnName("ProductID");
+//                b.Property(e => e.CategoryId).HasColumnName("CategoryID");
+//                b.Property(e => e.ProductName).IsRequired().HasMaxLength(MaxLengthProductName);
+//                b.Property(e => e.QuantityPerUnit).HasMaxLength(MaxLengthQuantityPerUnit);
+//                b.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
+//                b.Property(e => e.SupplierId).HasColumnName("SupplierID");
+//                b.Property(e => e.UnitPrice).HasColumnType("money").HasDefaultValueSql("((0))");
+//                b.Property(e => e.UnitsInStock).HasDefaultValueSql("((0))");
+//                b.Property(e => e.UnitsOnOrder).HasDefaultValueSql("((0))");
+//            });
 
             builder.Entity<Order>(b =>
             {
@@ -174,12 +175,12 @@ namespace Abp.Northwind.EntityFrameworkCore
                 b.Property(e => e.Freight).HasColumnType("money").HasDefaultValueSql("((0))");
                 b.Property(e => e.OrderDate).HasColumnType("datetime");
                 b.Property(e => e.RequiredDate).HasColumnType("datetime");
-                b.Property(e => e.ShipAddress).HasMaxLength(60);
-                b.Property(e => e.ShipCity).HasMaxLength(15);
-                b.Property(e => e.ShipCountry).HasMaxLength(15);
-                b.Property(e => e.ShipName).HasMaxLength(40);
-                b.Property(e => e.ShipPostalCode).HasMaxLength(10);
-                b.Property(e => e.ShipRegion).HasMaxLength(15);
+                b.Property(e => e.ShipAddress).HasMaxLength(MaxLengthShipAddress);
+                b.Property(e => e.ShipCity).HasMaxLength(MaxLengthShipCity);
+                b.Property(e => e.ShipCountry).HasMaxLength(MaxLengthShipCountry);
+                b.Property(e => e.ShipName).HasMaxLength(MaxLengthShipName);
+                b.Property(e => e.ShipPostalCode).HasMaxLength(MaxLengthShipPostalCode);
+                b.Property(e => e.ShipRegion).HasMaxLength(MaxLengthShipRegion);
                 b.Property(e => e.ShippedDate).HasColumnType("datetime");
                 b.HasOne(d => d.Shipper).WithMany(p => p.Orders).HasForeignKey(d => d.ShipVia)
                     .HasConstraintName("FK_Orders_Shippers");

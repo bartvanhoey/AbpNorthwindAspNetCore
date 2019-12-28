@@ -270,9 +270,6 @@ namespace Abp.Northwind.Migrations
                     b.Property<string>("TitleOfCourtesy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ReportsTo");
@@ -549,8 +546,8 @@ namespace Abp.Northwind.Migrations
                         .HasMaxLength(40);
 
                     b.Property<string>("QuantityPerUnit")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.Property<short?>("ReorderLevel")
                         .ValueGeneratedOnAdd()
@@ -684,8 +681,8 @@ namespace Abp.Northwind.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(24)")
-                        .HasMaxLength(24);
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnName("TenantId")
@@ -709,8 +706,8 @@ namespace Abp.Northwind.Migrations
                         .HasMaxLength(60);
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
