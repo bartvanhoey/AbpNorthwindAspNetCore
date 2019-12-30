@@ -88,6 +88,7 @@ namespace Abp.Northwind
             public const int MaxLengthShipName = 40;
             public const int MaxLengthShipPostalCode = 10;
             public const int MaxLengthShipRegion = 15;
+            public const int MaxLengthCustomerId = 5;
         }
     }
 }

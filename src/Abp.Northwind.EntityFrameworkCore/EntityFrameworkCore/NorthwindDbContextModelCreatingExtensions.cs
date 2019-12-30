@@ -150,27 +150,12 @@ namespace Abp.Northwind.EntityFrameworkCore
                     .HasConstraintName("FK_Employees_Employees");
             });
 
-//            builder.Entity<Product>(b =>
-//            {
-//                b.ToTable(NorthwindConsts.DbTablePrefix + "Products", NorthwindConsts.DbSchema);
-//                b.ConfigureByConvention();
-//                b.Property(e => e.Id).HasColumnName("ProductID");
-//                b.Property(e => e.CategoryId).HasColumnName("CategoryID");
-//                b.Property(e => e.ProductName).IsRequired().HasMaxLength(MaxLengthProductName);
-//                b.Property(e => e.QuantityPerUnit).HasMaxLength(MaxLengthQuantityPerUnit);
-//                b.Property(e => e.ReorderLevel).HasDefaultValueSql("((0))");
-//                b.Property(e => e.SupplierId).HasColumnName("SupplierID");
-//                b.Property(e => e.UnitPrice).HasColumnType("money").HasDefaultValueSql("((0))");
-//                b.Property(e => e.UnitsInStock).HasDefaultValueSql("((0))");
-//                b.Property(e => e.UnitsOnOrder).HasDefaultValueSql("((0))");
-//            });
-
             builder.Entity<Order>(b =>
             {
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Orders", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
                 b.Property(e => e.Id).HasColumnName("OrderID");
-                b.Property(e => e.CustomerId).HasColumnName("CustomerID").HasMaxLength(5);
+                b.Property(e => e.CustomerId).HasColumnName("CustomerID").HasMaxLength(OrderConsts.MaxLengthCustomerId);
                 b.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
                 b.Property(e => e.Freight).HasColumnType("money").HasDefaultValueSql("((0))");
                 b.Property(e => e.OrderDate).HasColumnType("datetime");
