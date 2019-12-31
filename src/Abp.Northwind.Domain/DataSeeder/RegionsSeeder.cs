@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Abp.Northwind.Entities;
+using Abp.Northwind.Models;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;

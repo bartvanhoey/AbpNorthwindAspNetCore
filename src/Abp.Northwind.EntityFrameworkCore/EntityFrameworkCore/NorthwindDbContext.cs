@@ -1,4 +1,4 @@
-﻿using Abp.Northwind.Entities;
+﻿using Abp.Northwind.Models;
 using Microsoft.EntityFrameworkCore;
 using Abp.Northwind.Users;
 using Volo.Abp.Data;

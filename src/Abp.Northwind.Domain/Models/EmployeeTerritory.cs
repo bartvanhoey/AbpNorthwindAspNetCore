@@ -1,9 +1,8 @@
 using System;
-using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
-namespace Abp.Northwind.Entities
+namespace Abp.Northwind.Models
 {
     public class EmployeeTerritory : FullAuditedEntity, IMultiTenant
     {

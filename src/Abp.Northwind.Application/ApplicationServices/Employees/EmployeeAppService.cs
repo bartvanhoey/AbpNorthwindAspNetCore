@@ -1,8 +1,8 @@
 using Abp.Northwind.ApplicationServices.Employees.Dtos;
+using Abp.Northwind.Models;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using Abp.Northwind.Entities;
 
 namespace Abp.Northwind.ApplicationServices.Employees
 {

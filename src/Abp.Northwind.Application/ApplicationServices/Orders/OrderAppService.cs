@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Abp.Northwind.ApplicationServices.Orders.Dtos;
-using Abp.Northwind.Entities;
+using Abp.Northwind.Models;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;

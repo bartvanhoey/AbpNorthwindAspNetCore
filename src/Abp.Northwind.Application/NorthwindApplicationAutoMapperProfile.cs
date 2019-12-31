@@ -1,6 +1,5 @@
 ﻿using Abp.Northwind.ApplicationServices.Categories.Dtos;
 using Abp.Northwind.ApplicationServices.Employees.Dtos;
-using Abp.Northwind.Entities;
 using AutoMapper;
 
 namespace Abp.Northwind
@@ -13,13 +12,9 @@ namespace Abp.Northwind
              * Alternatively, you can split your mapping configurations
              * into multiple profile classes for a better organization. */
 
-            CreateMap<Employee, EmployeeDto>();
-            CreateMap<CreateEmployeeDto, Employee>();
-            CreateMap<UpdateEmployeeDto, Employee>();
+            // SPLIT INTO MULTIPLE PROFILE CLASSES
 
-            CreateMap<Category, CategoryDto>();
-            CreateMap<CreateCategoryDto, Category>();
-            CreateMap<UpdateCategoryDto, Category>();
+    
         }
     }
 }

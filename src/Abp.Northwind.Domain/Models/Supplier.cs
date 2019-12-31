@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
-namespace Abp.Northwind.Entities
+namespace Abp.Northwind.Models
 {
     public class Supplier : FullAuditedEntity<int>, IMultiTenant
     {
