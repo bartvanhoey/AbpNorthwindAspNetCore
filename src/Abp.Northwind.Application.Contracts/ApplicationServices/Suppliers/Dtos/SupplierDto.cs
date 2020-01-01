@@ -1,17 +1,9 @@
-using System;
-using System.Collections.Generic;
-using Volo.Abp.Domain.Entities.Auditing;
-using Volo.Abp.MultiTenancy;
+using Volo.Abp.Application.Dtos;
 
-namespace Abp.Northwind.Models
+namespace Abp.Northwind.ApplicationServices.Suppliers.Dtos
 {
-    public class Supplier : FullAuditedEntity<int>, IMultiTenant
+    public class SupplierDto : FullAuditedEntityDto<int>
     {
-        public Supplier()
-        {
-            Products = new HashSet<Product>();
-        }
-
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }
@@ -23,8 +15,5 @@ namespace Abp.Northwind.Models
         public string Phone { get; set; }
         public string Fax { get; set; }
         public string HomePage { get; set; }
-        public Guid? TenantId { get; }
-
-        public ICollection<Product> Products { get; private set; }
     }
 }
