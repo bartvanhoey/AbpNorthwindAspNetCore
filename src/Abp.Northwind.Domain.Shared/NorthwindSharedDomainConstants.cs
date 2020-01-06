@@ -25,6 +25,7 @@ namespace Abp.Northwind
 
         public static class CustomerConsts
         {
+            public const int MaxLengthId = 5;
             public const int MaxLengthAddress = 60;
             public const int MaxLengthCity = 15;
             public const int MaxLengthCompanyName = 40;

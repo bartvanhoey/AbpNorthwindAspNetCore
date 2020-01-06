@@ -5,6 +5,9 @@ namespace Abp.Northwind.ApplicationServices.Customers.Dtos
 {
     public class CreateCustomerDto
     {
+        [Required] [StringLength(MaxLengthId)]
+        public string Id { get; set; }
+        
         [StringLength(MaxLengthAddress)]
         public string Address { get; set; }
 

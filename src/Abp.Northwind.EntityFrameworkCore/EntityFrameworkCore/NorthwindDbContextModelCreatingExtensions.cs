@@ -67,7 +67,7 @@ namespace Abp.Northwind.EntityFrameworkCore
             {
                 b.ToTable(NorthwindConsts.DbTablePrefix + "Customers", NorthwindConsts.DbSchema);
                 b.ConfigureByConvention();
-                b.Property(e => e.Id).HasColumnName("CustomerID").HasMaxLength(5).ValueGeneratedNever();
+                b.Property(e => e.Id).HasColumnName("CustomerID").HasMaxLength(CustomerConsts.MaxLengthId).ValueGeneratedNever();
                 b.Property(e => e.Address).HasMaxLength(CustomerConsts.MaxLengthAddress);
                 b.Property(e => e.City).HasMaxLength(CustomerConsts.MaxLengthCity);
                 b.Property(e => e.CompanyName).IsRequired().HasMaxLength(CustomerConsts.MaxLengthCompanyName);
